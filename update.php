@@ -18,6 +18,7 @@ if (isset($_POST['update'])) {
     
     if ($conn->query($sql) === TRUE) {
         echo "Étudiant mis à jour avec succès.";
+        header("Location: accueil.php");
     } else {
         echo "Erreur de mise à jour : " . $conn->error;
     }
