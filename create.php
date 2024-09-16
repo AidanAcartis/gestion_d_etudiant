@@ -18,6 +18,7 @@ if (isset($_POST['submit'])) {
     
     if ($conn->query($sql) === TRUE) {
         echo "Étudiant ajouté avec succès.";
+        header("Location: accueil.php");
     } else {
         echo "Erreur : " . $sql . "<br>" . $conn->error;
     }

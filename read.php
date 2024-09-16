@@ -9,6 +9,7 @@ if (isset($_GET['id'])) {
     $sql = "SELECT * FROM etudiants WHERE id=$id";
     $result = $conn->query($sql);
 
+    echo "<a href='accueil.php'>Retour à l'accueil</a><br><br>";
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         echo "<h2>Détails de l'étudiant</h2>";
