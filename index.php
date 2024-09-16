@@ -1,32 +1,41 @@
 <?php
+session_start();
 include 'config.php';
 
-$sql = "SELECT * FROM etudiants";
-$result = $conn->query($sql);
+// Vérifier si le formulaire a été soumis
+if (isset($_POST['login'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-if ($result->num_rows > 0) {
-    echo "<table>";
-    echo "<tr><th>ID</th><th>Nom</th><th>Prénom</th><th>Parcours</th><th>Filière</th><th>Actions</th></tr>";
-    while($row = $result->fetch_assoc()) {
-        echo "<tr>";
-        echo "<td>" . $row['id'] . "</td>";
-        echo "<td>" . $row['nom'] . "</td>";
-        echo "<td>" . $row['prenom'] . "</td>";
-        echo "<td>" . $row['parcours'] . "</td>";
-        echo "<td>" . $row['filiere'] . "</td>";
-        echo "<td>
-                <a href='read.php?id=" . $row['id'] . "'>Voir</a> |
-                <a href='update.php?id=" . $row['id'] . "'>Modifier</a> |
-                <a href='delete.php?id=" . $row['id'] . "'>Supprimer</a>
-              </td>";
-        echo "</tr>";
+    // Ici, vous pouvez utiliser des informations de connexion codées en dur ou les récupérer depuis une base de données
+    // Exemple d'informations d'identification en dur :
+    $admin_username = 'admin';
+    $admin_password = 'password123';
+
+    // Vérification des informations d'identification
+    if ($username === $admin_username && $password === $admin_password) {
+        $_SESSION['admin_logged_in'] = false;  // Met à jour la session pour indiquer que l'admin est connecté
+        header("Location: accueil.php");  // Redirige vers la page d'accueil
+        exit;
+    } else {
+        $error_message = "Nom d'utilisateur ou mot de passe incorrect.";
     }
-    echo "</table>";
-} else {
-    echo "Aucun étudiant trouvé.";
 }
-
-$conn->close();
 ?>
 
-<a href="create.php">Ajouter un nouvel étudiant</a>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Connexion Administrateur</title>
+</head>
+<body>
+    <h2>Connexion Administrateur</h2>
+    <?php if (isset($error_message)) { echo "<p style='color:red;'>$error_message</p>"; } ?>
+
+    <form action="index.php" method="POST">
+        Nom d'utilisateur: <input type="text" name="username" required><br>
+        Mot de passe: <input type="password" name="password" required><br>
+        <input type="submit" name="login" value="Se connecter">
+    </form>
+</body>
+</html>

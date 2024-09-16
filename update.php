@@ -1,4 +1,5 @@
 <?php
+include 'auth.php';  // Inclut la vérification de session
 include 'config.php';
 
 if (isset($_POST['update'])) {
@@ -39,9 +40,7 @@ $row = $result->fetch_assoc();
     <select name="parcours" required>
         <option value="Science" <?php if($row['parcours'] == 'Science') echo 'selected'; ?>>Science</option>
         <option value="Lettres" <?php if($row['parcours'] == 'Lettres') echo 'selected'; ?>>Lettres</option>
-        <option value="Informatique" <?
-
-php if($row['parcours'] == 'Informatique') echo 'selected'; ?>>Informatique</option>
+        <option value="Informatique" <?php if($row['parcours'] == 'Informatique') echo 'selected'; ?>>Informatique</option>
         <option value="Médecine" <?php if($row['parcours'] == 'Médecine') echo 'selected'; ?>>Médecine</option>
     </select><br>
     Filière: <input type="text" name="filiere" value="<?php echo $row['filiere']; ?>" required><br>

@@ -1,4 +1,5 @@
 <?php
+include 'auth.php';  // Inclut la vérification de session
 include 'config.php';
 
 if (isset($_GET['id'])) {
