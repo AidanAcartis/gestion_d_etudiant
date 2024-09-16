@@ -1,20 +1,22 @@
 <?php
-session_start();
-include 'config.php';
+session_start();  // Démarre la session
 
-// Vérifier si le formulaire a été soumis
+// Vérifier si l'utilisateur est déjà connecté
+if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
+    header("Location: accueil.php");  // Redirige vers la page d'accueil si déjà connecté
+    exit;
+}
+
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Ici, vous pouvez utiliser des informations de connexion codées en dur ou les récupérer depuis une base de données
-    // Exemple d'informations d'identification en dur :
+    // Informations d'identification codées en dur (à remplacer par des données de la base de données)
     $admin_username = 'admin';
     $admin_password = 'password123';
 
-    // Vérification des informations d'identification
     if ($username === $admin_username && $password === $admin_password) {
-        $_SESSION['admin_logged_in'] = false;  // Met à jour la session pour indiquer que l'admin est connecté
+        $_SESSION['admin_logged_in'] = true;  // Définit la variable de session
         header("Location: accueil.php");  // Redirige vers la page d'accueil
         exit;
     } else {

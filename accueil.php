@@ -7,6 +7,7 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     echo "<h1>Bienvenue sur la page d'accueil</h1>";
+    echo "<a href='logout.php'>Se déconnecter</a><br><br>";  // Ajoute le bouton de déconnexion
     echo "<table>";
     echo "<tr><th>ID</th><th>Nom</th><th>Prénom</th><th>Parcours</th><th>Filière</th><th>Actions</th></tr>";
     while($row = $result->fetch_assoc()) {
